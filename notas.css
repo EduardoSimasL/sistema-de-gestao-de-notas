@@ -38,10 +38,3 @@ li {
     height: auto;
     background-color: rgb(53, 59, 131);
 }
-  
-.form {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-top: 100px;
-}

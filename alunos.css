@@ -2,4 +2,39 @@
     margin: 0;
     padding: 0;
     text-decoration: none;
+    list-style: none;
+    background-color: rgb(24, 24, 50);
+}
+
+header {
+    height: 75px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: rgb(53, 59, 131);
+}   
+
+nav {
+    width: 60%;
+}
+
+ul {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    background-color: rgb(53, 59, 131);
+}
+
+li {
+    list-style: none;
+    color: white;
+    cursor: pointer;
+    font-size: 19px;
+    background-color: rgb(53, 59, 131);
+}
+
+#logo {
+    width: 130px;
+    height: auto;
+    background-color: rgb(53, 59, 131);
 }
