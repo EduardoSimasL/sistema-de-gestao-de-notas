@@ -31,12 +31,21 @@
         </nav>
   </header>
 
-  <div class="form">
+  <h1>Gestão de Notas</h1> <!-- gestão ou cadastro ? -->
+  <form id="cadastroForm">
+    <label for="input_nome">Nome:</label>
+    <input type="text" id="input_nome" required>
+    <label for="input_ra">RA:</label>
+    <input type="text" id="input_ra" required>
+    <label for="input_email">E-mail:</label>
+    <input type="email" id="input_email" required>
     
-</div>
+    <button type="button" onclick="adicionaDadosAluno()">Adicionar Aluno</button>
+  </form>
 
-  <h1>LOGIN</h1> <!-- gestão ou cadastro ? -->
-  
+  <table id="tabelaAlunos">
+    <!-- Aqui serão exibidos os dados dos alunos -->
+  </table>
 
   <script src="script.js"></script>
 </body>

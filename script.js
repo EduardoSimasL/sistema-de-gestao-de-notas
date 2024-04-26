@@ -58,9 +58,6 @@ function adicionaDadosAluno() {
         celula.textContent = valorCelula; // Insere o valor na célula
       }
       
-  
-    // Limpe os campos do formulário após adicionar o aluno
-    document.getElementById('cadastroForm').reset();
 
     const aluno = {
         nome: nome,
@@ -92,6 +89,9 @@ function adicionaDadosAluno() {
     
       // Armazene os dados atualizados no LocalStorage
       localStorage.setItem('alunos', JSON.stringify(alunos));
+      
+      // Remover alunos
+      localStorage.removeItem();
     
       // Limpe os campos do formulário após adicionar o aluno
       document.getElementById('cadastroForm').reset();
