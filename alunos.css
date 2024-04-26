@@ -60,17 +60,20 @@ img {
     width: 50%;
     height: 50%;
     object-fit: cover;
+    margin-left: 50px;
     
 }
 
 .form-image  {
     width: 70%;
+    height: auto;
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 15px;
-    
+    border-radius: 15px; 
+      
 }
+
 
 .form {
     width: 50%;
@@ -80,5 +83,42 @@ img {
     align-items: center;
     padding: 3rem;
     border-radius: 15px;
+    color: white;
+    margin-right: 85px;
+}
+
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 45px 0;
+    color: white;
+    cursor: pointer;
+}
+
+.input-box {
+    display: flex;
+    flex-direction: column;
+    color: white;
+    cursor: pointer;
+}
+
+.input-box input {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 1px 1px 6px rgb(24, 24, 50);
+    font-size: 1rem;
+    color: white;
+    margin: 1rem 0;
+    padding: 1rem 1.5rem;
+}
+
+.input-box input:hover {
+    background-color: rgb(24, 24, 50);
+}
+
+.input-box input:focus-visible {
+    outline: 1px solid white;
 }
 
