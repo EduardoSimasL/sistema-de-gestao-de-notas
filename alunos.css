@@ -34,7 +34,7 @@ li {
 }
 
 #logo {
-    width: 130px;
+    width: 120px;
     height: auto;
     background-color: rgb(53, 59, 131);
 }
@@ -85,10 +85,20 @@ img {
     border-radius: 15px;
     color: white;
     margin-right: 85px;
+    font-weight: bold;
 }
 
 
-.input-group {
+.input_nome  {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 45px 0;
+    color: white;
+    cursor: pointer;
+}
+
+.input_ra  {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -122,3 +132,6 @@ img {
     outline: 1px solid white;
 }
 
+.input-field input::-webkit-inner-spin-button {
+    appearance: none;
+}
