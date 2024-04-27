@@ -43,37 +43,38 @@
         </div>
 
         
-        <div class="form">
+        <div class="cadastroForm">
             <div class="input-box">
                 <div class="input_nome">
 
-                    <label for="name">NOME COMPLETO </label>
+                    <label for="input_nome">NOME COMPLETO </label>
                     <div class="input-field">
                         <i class="fa-solid fa-user"></i>
-                        <input id="name" type="text" name="name" placeholder="Digite seu nome" required>
+                        <input id="input_nome" type="text" name="name" placeholder="Digite seu nome" required>
                     </div>
                       
                 </div>
 
                 <div class="input_email">
-                    <label for="email">E-MAIL</label>
+                    <label for="input_email">E-MAIL</label>
                     <div class="input-field">
                         <i class="fa-solid fa-envelope"></i>
-                       <input id="email" type="email" name="email" placeholder="Digite seu e-mail" required>
+                       <input id="input_email" type="email" name="email" placeholder="Digite seu e-mail" required>
                     </div>
                 </div>
 
                 <div class="input_ra">
-                    <label for="number">REGISTRO ACADÊMICO [RA]</label>
+                    <label for="input_ra">REGISTRO ACADÊMICO [RA]</label>
                     <div class="input-field">
                         <i class="fa-solid fa-folder-open"></i>
-                        <input id="number" type="number" name="number" placeholder="Digite seu RA" required>
+                        <input id="input_ra" type="number" name="number" placeholder="Digite seu RA" required>
                     </div>
                 </div>
+                <button type="button" onclick="adicionaDadosAluno()">Adicionar Aluno</button>
             </div>
         </div>
     </div>
     </div>
-
+    <script src="script.js"></script>
 </body>
 </html>

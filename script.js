@@ -1,82 +1,106 @@
 // Função para adicionar dados de um aluno
+window.onload = function() {
+  carregarDadosDaTabela();
+};
+
 function adicionaDadosAluno() {
     // Obtenha os valores dos campos do formulário
     const nome = document.getElementById('input_nome').value;
     const ra = document.getElementById('input_ra').value;
     const email = document.getElementById('input_email').value;
-    const prova1 = parseFloat(document.getElementById('input_prova_1').value);
-    const aep1 = parseFloat(document.getElementById('input_aep_1').value);
-    const provaIntegrada1 = parseFloat(document.getElementById('input_prova_integrada_1').value);
-    const prova2 = parseFloat(document.getElementById('input_prova_2').value);
-    const aep2 = parseFloat(document.getElementById('input_aep_2').value);
-    const provaIntegrada2 = parseFloat(document.getElementById('input_prova_integrada_2').value);
+
+    let prova1 = null;
+    let aep1 = null;
+    let provaIntegrada1 = null;
+    let prova2 = null;
+    let aep2 = null;
+    let provaIntegrada2 = null;
+
+    const inputProva1 = document.getElementById('input_prova_1');
+    const inputAep1 = document.getElementById('input_aep_1');
+    const inputProvaIntegrada1 = document.getElementById('input_prova_integrada_1');
+    if (inputProva1 && inputAep1 && inputProvaIntegrada1) {
+        prova1 = parseFloat(inputProva1.value);
+        aep1 = parseFloat(inputAep1.value);
+        provaIntegrada1 = parseFloat(inputProvaIntegrada1.value);
+    }
+
+    const inputProva2 = document.getElementById('input_prova_2');
+    const inputAep2 = document.getElementById('input_aep_2');
+    const inputProvaIntegrada2 = document.getElementById('input_prova_integrada_2');
+    if (inputProva2 && inputAep2 && inputProvaIntegrada2) {
+        prova2 = parseFloat(inputProva2.value);
+        aep2 = parseFloat(inputAep2.value);
+        provaIntegrada2 = parseFloat(inputProvaIntegrada2.value);
+    }
   
     // Realize as validações necessárias
 
   
     // Calcule as médias e o status de aprovação
+    const med1 = null;
+    const med2= null;
+    let medFinal;
+    /*****************************Fun��es*****************************************************/
+    function calculo_media(){
+    //calculo da m�dia do primeiro bimestre
+    med1 = ((prova1 * 0.8) + (aep1 * 0.1) + (provaIntegrada1 * 0.1)).toFixed(2);
+    valorCelula = med1; // Formata a m�dia para 2 casas decimais
 
-  
-    // Crie uma nova linha na tabela para exibir os dados do aluno
-    const tabela = document.getElementById('tabelaAlunos');
-    const novaLinha = tabela.insertRow(-1);
-    const colunas = ['Nome', 'RA', 'E-mail', 'Prova 1', 'AEP 1', 'Prova Integrada 1', 'Prova 2', 'AEP 2', 'Prova Integrada 2', 'Média 1', 'Média 2', 'Média Final', 'Status'];
-    for (let i = 0; i < colunas.length; i++) {
-        const celula = novaLinha.insertCell(i);
-        let valorCelula;
-      
-        // Insira os dados do aluno nas células correspondentes
-        switch (colunas[i]) {
-          case 'Nome':
-            valorCelula = nome;
-            break;
-          case 'RA':
-            valorCelula = ra;
-            break;
-          case 'E-mail':
-            valorCelula = email;
-            break;
-          case 'Prova 1':
-            valorCelula = prova1.toFixed(2); // Formata a nota para 2 casas decimais
-            break;
-          case 'AEP 1':
-            valorCelula = aep1.toFixed(2); // Formata a nota para 2 casas decimais
-            break;
-          case 'Prova Integrada 1':
-            valorCelula = provaIntegrada1.toFixed(2); // Formata a nota para 2 casas decimais
-            break;
-          // Adicione outros casos conforme necessário para as outras colunas
-          case 'Média 1':
-            const mediaBimestral1 = ((prova1 * 0.8) + (aep1 * 0.1) + (provaIntegrada1 * 0.1)).toFixed(2);
-            valorCelula = mediaBimestral1; // Formata a média para 2 casas decimais
-            break;
-          // Adicione outros casos conforme necessário para as outras colunas
-          default:
-            valorCelula = ''; // Se não houver correspondência, deixe o valor vazio
+    //Se as notas do segundo bimestre forem diferente de valores nulos ser� calculado a m�dia
+    if (med1 !== null) {
+        //calculo da m�dia do segundo bimestre
+        med2 = ((prova2 * 0.8) + (aep2 * 0.1) + (provaIntegrada2 * 0.1)).toFixed(2);
+        valorCelula = med2; // Formata a m�dia para 2 casas decimais
+
+        //calculo da m�dia final
+        medFinal = ((med1 + med2)/2);
+        valorCelula = medFinal; // Formata a m�dia para 2 casas decimais
+    }
+    else {
+        // Se as notas do primeiro bimestre n�o estiverem preenchidas, exibir uma mensagem de erro
+        erro = "Por favor, insira as notas do primeiro bimestre antes de inserir as do segundo bimestre."
+        console.log("Por favor, insira as notas do primeiro bimestre antes de inserir as do segundo bimestre.");
+    }
+    }
+
+    //Status de aprova��o:
+    function status(){
+        //v�riavel que armazena o status de aprova��o do aluno
+        let status_aluno;
+
+        if(medFinal >= 6) {
+            status_aluno = "Aprovado"
         }
-      
-        celula.textContent = valorCelula; // Insere o valor na célula
-      }
-      
+        if(medFinal < 6 && medFinal >= 3) {
+            status_aluno = "Recupera��o"
+        }
+        else {
+            status_aluno = "Reprovado"
+        }
+
+    }
+
 
     const aluno = {
         nome: nome,
         ra: ra,
         email: email,
-        notas: {
-          primeiroBimestre: {
-            prova: prova1,
-            aep: aep1,
-            provaIntegrada: provaIntegrada1
-          },
-          segundoBimestre: {
-            prova: prova2,
-            aep: aep2,
-            provaIntegrada: provaIntegrada2
-          }
+        
+        prova1: prova1,
+        aep1: aep1,
+        provaIntegrada1: provaIntegrada1,
+        med1: med1,
+          
+        prova2: prova2,
+        aep2: aep2,
+        provaIntegrada2: provaIntegrada2,
+        med2: med2,
+
+        medFinal: medFinal
+        
         }
-      };
-    
+      
       // Verifique se já há dados armazenados
       let alunos = [];
       const alunosArmazenados = localStorage.getItem('alunos');
@@ -90,13 +114,42 @@ function adicionaDadosAluno() {
       // Armazene os dados atualizados no LocalStorage
       localStorage.setItem('alunos', JSON.stringify(alunos));
       
-      // Remover alunos
-      localStorage.removeItem();
-    
-      // Limpe os campos do formulário após adicionar o aluno
-      document.getElementById('cadastroForm').reset();
+      // Remover alunos localStorage.removeItem();
+      
+
+      carregarDadosDaTabela();
     }
 
+    function carregarDadosDaTabela() {
+      const tabela = document.getElementById('tabelaAlunos');
+      // Verifica se a tabela está presente antes de tentar manipulá-la
+  if (tabela) {
+    const tbody = tabela.querySelector('tbody');
+    document.getElementById('cadastroForm').reset(); // Limpe os campos do formulário após adicionar o aluno
+    if (tbody) {
+      tbody.innerHTML = ''; // Limpa a tabela antes de carregar os dados
 
+      // Verifica se há dados armazenados no localStorage
+      const alunosArmazenados = localStorage.getItem('alunos');
+      if (alunosArmazenados) {
+        const alunos = JSON.parse(alunosArmazenados);
+
+        // Itera sobre os alunos armazenados e insere cada aluno na tabela
+        alunos.forEach(aluno => {
+          const novaLinha = tbody.insertRow(-1);
+          novaLinha.insertCell(0).textContent = aluno.nome;
+          novaLinha.insertCell(1).textContent = aluno.ra;
+          novaLinha.insertCell(2).textContent = aluno.email;
+        });
+      }
+    } else {
+      console.log("A tabela não possui um corpo (tbody).");
+    }
+  } else {
+    console.log("A tabela não foi encontrada.");
+  }
+}
+
+  
 
   

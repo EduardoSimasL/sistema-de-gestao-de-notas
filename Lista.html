@@ -32,19 +32,34 @@
   </header>
 
   <h1>Gestão de Notas</h1> <!-- gestão ou cadastro ? -->
-  <form id="cadastroForm">
-    <label for="input_nome">Nome:</label>
-    <input type="text" id="input_nome" required>
-    <label for="input_ra">RA:</label>
-    <input type="text" id="input_ra" required>
-    <label for="input_email">E-mail:</label>
-    <input type="email" id="input_email" required>
-    
-    <button type="button" onclick="adicionaDadosAluno()">Adicionar Aluno</button>
-  </form>
+  
 
   <table id="tabelaAlunos">
-    <!-- Aqui serão exibidos os dados dos alunos -->
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>RA</th>
+        <th>E-mail</th>
+        <!-- Adicione as outras colunas necessárias, como Nota Prova 1, Nota AEP 1, etc. -->
+        <!-- Lembre-se de adicionar os cabeçalhos das colunas -->
+        <!-- Por exemplo: -->
+        <th>Nota Prova 1</th>
+        <th>Nota AEP 1</th>
+        <th>Nota Prova Integrada 1</th>
+        <!-- Repita para o segundo bimestre -->
+        <th>Nota Prova 2</th>
+        <th>Nota AEP 2</th>
+        <th>Nota Prova Integrada 2</th>
+        <th>Média 1</th>
+        <th>Média 2</th>
+        <th>Média Final</th>
+        <th>Status</th>
+        <th>Ações</th> <!-- Coluna para botões de ação, como editar e excluir -->
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Os dados dos alunos serão inseridos aqui dinamicamente com JavaScript -->
+    </tbody>
   </table>
 
   <script src="script.js"></script>
