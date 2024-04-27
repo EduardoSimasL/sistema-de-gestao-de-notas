@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
@@ -14,10 +13,10 @@
             <th>Coluna 2</th>
         </tr>
         <?php
-            $host = 'localhost';
-            $user = 'seu_usuario';
-            $password = 'sua_senha';
-            $database = 'seu_banco_de_dados';
+            $host = '';
+            $user = '';
+            $password = '';
+            $database = '';
 
             $conn = new mysqli($host, $user, $password, $database);
 
@@ -25,7 +24,6 @@
                 die("Falha na conexão: " . $conn->connect_error);
             }
 
-            
             $sql = "SELECT coluna1, coluna2 FROM sua_tabela";
             $result = $conn->query($sql);
 
@@ -36,7 +34,6 @@
             } else {
                 echo "Nenhum dado encontrado";
             }
-
             $conn->close();
         ?>
     </table>
