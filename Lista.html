@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,51 +7,79 @@
   <link rel="stylesheet" href="lista.css">
   <link rel="website icon" type="png" href="./Img/Educ_1.png">
 </head>
-
 <body>
   <header>
     <a href="./Index.html"><img id="logo" src="./Img/Educ_1.png"></a>
-    <nav>
-      <ul>
-        <a href="./Alunos.html">
-          <li>Cadastro de alunos</li>
-        </a>
+        <nav>
+            <ul>
+              <a href="./Alunos.html">
+                <li>Cadastro de alunos</li> 
+            </a>
 
-        <a href="./Lista.html">
-          <li>Lista de alunos</li>
-        </a>
+            <a href="./Lista.html">
+                <li>Lista de alunos</li>
+            </a>
 
-        <a href="./Notas.html">
-          <li>Cadastro de notas</li>
-        </a>
+            <a href="./Notas.html">
+                <li>Cadastro de notas</li>
+            </a>
 
-        <a href="">
-          <li>Sair</li>
-        </a>
-      </ul>
-    </nav>
+                <a href="">
+                    <li>Sair</li>
+                </a>
+            </ul>
+        </nav>
   </header>
 
-  <!-- gestão ou cadastro ? -->
+  <h1>Gestão de Notas</h1> <!-- gestão ou cadastro ? -->
+  <form id="cadastroNotasForm">
+    
+    <h2>Primeiro Bimestre</h2>
+    <label for="input_prova_1">Nota da Prova:</label>
+    <input type="number" id="input_prova_1" min="0" max="8" step="0.1" required>
+    <label for="input_aep_1">Nota da AEP:</label>
+    <input type="number" id="input_aep_1" min="0" max="1" step="0.1" required>
+    <label for="input_prova_integrada_1">Nota da Prova Integrada:</label>
+    <input type="number" id="input_prova_integrada_1" min="0" max="1" step="0.1" required>
+    <h2>Segundo Bimestre</h2>
+    <label for="input_prova_2">Nota da Prova:</label>
+    <input type="number" id="input_prova_2" min="0" max="8" step="0.1" required>
+    <label for="input_aep_2">Nota da AEP:</label>
+    <input type="number" id="input_aep_2" min="0" max="1" step="0.1" required>
+    <label for="input_prova_integrada_2">Nota da Prova Integrada:</label>
+    <input type="number" id="input_prova_integrada_2" min="0" max="1" step="0.1" required>
+    
+    <button type="button" onclick="adicionaDadosAluno()">Adicionar Aluno</button>
+  </form>
 
-  <body>
-    <h1>Gestão de Notas</h1>
-    <form id="cadastroForm">
-      <label for="input_nome">Nome:</label>
-      <input type="text" id="input_nome" required>
-      <label for="input_ra">RA:</label>
-      <input type="text" id="input_ra" required>
-      <label for="input_email">E-mail:</label>
-      <input type="email" id="input_email" required>
+  <table id="tabelaAlunos">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>RA</th>
+        <th>E-mail</th>
+        <!-- Adicione as outras colunas necessárias, como Nota Prova 1, Nota AEP 1, etc. -->
+        <!-- Lembre-se de adicionar os cabeçalhos das colunas -->
+        <!-- Por exemplo: -->
+        <th>Nota Prova 1</th>
+        <th>Nota AEP 1</th>
+        <th>Nota Prova Integrada 1</th>
+        <!-- Repita para o segundo bimestre -->
+        <th>Nota Prova 2</th>
+        <th>Nota AEP 2</th>
+        <th>Nota Prova Integrada 2</th>
+        <th>Média 1</th>
+        <th>Média 2</th>
+        <th>Média Final</th>
+        <th>Status</th>
+        <th>Ações</th> <!-- Coluna para botões de ação, como editar e excluir -->
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Os dados dos alunos serão inseridos aqui dinamicamente com JavaScript -->
+    </tbody>
+  </table>
 
-      <button type="button" onclick="adicionaDadosAluno()">Adicionar Aluno</button>
-    </form>
-
-    <table id="tabelaAlunos">
-      <!-- Aqui serão exibidos os dados dos alunos -->
-    </table>
-
-    <script src="gestao.js"></script>
-  </body>
-
-  </html>
+  <script src="script.js"></script>
+</body>
+</html>

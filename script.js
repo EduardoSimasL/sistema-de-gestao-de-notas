@@ -1,140 +1,90 @@
-// Função para adicionar dados de um aluno
 window.onload = function() {
   carregarDadosDaTabela();
 };
 
 function adicionaDadosAluno() {
-    // Obtenha os valores dos campos do formulário
-    const nome = document.getElementById('input_nome').value;
-    const ra = document.getElementById('input_ra').value;
-    const email = document.getElementById('input_email').value;
+  const inputNome = document.getElementById('input_nome');
+  const inputEmail = document.getElementById('input_email');
+  const inputRA = document.getElementById('input_ra');
 
-    let prova1 = null;
-    let aep1 = null;
-    let provaIntegrada1 = null;
-    let prova2 = null;
-    let aep2 = null;
-    let provaIntegrada2 = null;
+  if (inputNome && inputEmail && inputRA) {
+    const nome = inputNome.value;
+    const email = inputEmail.value;
+    const ra = inputRA.value;
 
-    const inputProva1 = document.getElementById('input_prova_1');
-    const inputAep1 = document.getElementById('input_aep_1');
-    const inputProvaIntegrada1 = document.getElementById('input_prova_integrada_1');
-    if (inputProva1 && inputAep1 && inputProvaIntegrada1) {
-        prova1 = parseFloat(inputProva1.value);
-        aep1 = parseFloat(inputAep1.value);
-        provaIntegrada1 = parseFloat(inputProvaIntegrada1.value);
-    }
-
-    const inputProva2 = document.getElementById('input_prova_2');
-    const inputAep2 = document.getElementById('input_aep_2');
-    const inputProvaIntegrada2 = document.getElementById('input_prova_integrada_2');
-    if (inputProva2 && inputAep2 && inputProvaIntegrada2) {
-        prova2 = parseFloat(inputProva2.value);
-        aep2 = parseFloat(inputAep2.value);
-        provaIntegrada2 = parseFloat(inputProvaIntegrada2.value);
-    }
-
-  
-  // Calcule as médias e o status de aprovação
-    let med1 = null;
-    let med2 = null;
-    let medFinal = null
-/*****************************Fun��es*****************************************************/
-  
-    //calculo da m�dia do primeiro bimestre
-    med1 = ((prova1 * 0.8) + (aep1 * 0.1) + (provaIntegrada1 * 0.1)).toFixed(2);
-    valorCelula = med1; // Formata a m�dia para 2 casas decimais
-
-    //Se as notas do segundo bimestre forem diferente de valores nulos ser� calculado a m�dia
-    if (med1 !== null) {
-        //calculo da m�dia do segundo bimestre
-        med2 = ((prova2 * 0.8) + (aep2 * 0.1) + (provaIntegrada2 * 0.1)).toFixed(2);
-        valorCelula = med2; // Formata a m�dia para 2 casas decimais
-
-        //calculo da m�dia final
-        medFinal = ((med1 + med2)/2);
-        valorCelula = medFinal; // Formata a m�dia para 2 casas decimais
-    }
-   else {
-        // Se as notas do primeiro bimestre n�o estiverem preenchidas, exibir uma mensagem de erro
-        erro = "Por favor, insira as notas do primeiro bimestre antes de inserir as do segundo bimestre."
-        console.log("Por favor, insira as notas do primeiro bimestre antes de inserir as do segundo bimestre.");
-    }
-    
-    //Status de aprova��o:
-  
-    //v�riavel que armazena o status de aprova��o do aluno
-    let status_aluno;
-
-    if(medFinal >= 6) {
-        status_aluno = "Aprovado"
-    }
-    if(medFinal < 6 && medFinal >= 3) {
-        status_aluno = "Recupera��o"
-    }
-    else {
-        status_aluno = "Reprovado"
-    }
-
-
-    const aluno = {
+    if (nome.trim() !== '' && email.trim() !== '' && ra.trim() !== '') {
+      const aluno = {
         nome: nome,
-        ra: ra,
         email: email,
-        
-        prova1: prova1,
-        aep1: aep1,
-        provaIntegrada1: provaIntegrada1,
-        med1: med1,
-          
-        prova2: prova2,
-        aep2: aep2,
-        provaIntegrada2: provaIntegrada2,
-        med2: med2,
+        ra: ra,
+        prova1: null,
+        aep1: null,
+        provaIntegrada1: null,
+        med1: null,
+        prova2: null,
+        aep2: null,
+        provaIntegrada2: null,
+        med2: null,
+        medFinal: null,
+        status: null
+      };
 
-        medFinal: medFinal
-        
-        }
-      
-      // Verifique se já há dados armazenados
       let alunos = [];
       const alunosArmazenados = localStorage.getItem('alunos');
       if (alunosArmazenados) {
         alunos = JSON.parse(alunosArmazenados);
       }
-    
-      // Adicione o novo aluno à lista
+
       alunos.push(aluno);
-    
-      // Armazene os dados atualizados no LocalStorage
       localStorage.setItem('alunos', JSON.stringify(alunos));
-      
-      // Remover alunos localStorage.removeItem();
-      
+
+      inputNome.value = '';
+      inputEmail.value = '';
+      inputRA.value = '';
 
       carregarDadosDaTabela();
+    } else {
+      console.log("Por favor, preencha todos os campos obrigatórios.");
     }
+  }
+}
 
-    function carregarDadosDaTabela() {
-      const tabela = document.getElementById('tabelaAlunos');
-      // Verifica se a tabela está presente antes de tentar manipulá-la
+function carregarDadosDaTabela() {
+  const tabela = document.getElementById('tabelaAlunos');
   if (tabela) {
     const tbody = tabela.querySelector('tbody');
-    document.getElementById('cadastroForm').reset(); // Limpe os campos do formulário após adicionar o aluno
     if (tbody) {
-      tbody.innerHTML = ''; // Limpa a tabela antes de carregar os dados
+      tbody.innerHTML = '';
 
-      // Verifica se há dados armazenados no localStorage
       const alunosArmazenados = localStorage.getItem('alunos');
       if (alunosArmazenados) {
         const alunos = JSON.parse(alunosArmazenados);
-
-        // Itera sobre os alunos armazenados e insere cada aluno na tabela
         alunos.forEach(aluno => {
           const novaLinha = tbody.insertRow(-1);
           novaLinha.insertCell(0).textContent = aluno.nome;
           novaLinha.insertCell(1).textContent = aluno.ra;
           novaLinha.insertCell(2).textContent = aluno.email;
+          novaLinha.insertCell(3).textContent = aluno.prova1 || '';
+          novaLinha.insertCell(4).textContent = aluno.aep1 || '';
+          novaLinha.insertCell(5).textContent = aluno.provaIntegrada1 || '';
+          novaLinha.insertCell(6).textContent = aluno.prova2 || '';
+          novaLinha.insertCell(7).textContent = aluno.aep2 || '';
+          novaLinha.insertCell(8).textContent = aluno.provaIntegrada2 || '';
+          novaLinha.insertCell(9).textContent = aluno.med1 || '';
+          novaLinha.insertCell(10).textContent = aluno.med2 || '';
+          novaLinha.insertCell(11).textContent = aluno.medFinal || '';
+          novaLinha.insertCell(12).textContent = aluno.status || '';
+          novaLinha.insertCell(13).innerHTML = `<button onclick="editarNotasBimestre2(${JSON.stringify(aluno)})">Editar</button>`;
+
+
+          // Adiciona botão de edição
+          const cellAcoes = novaLinha.insertCell(13);
+          const btnEditar = document.createElement('button');
+          btnEditar.textContent = 'Editar';
+          btnEditar.onclick = function() {
+            editarNotas(aluno);
+          };
+          cellAcoes.appendChild(btnEditar);
         });
       }
     } else {
@@ -145,6 +95,125 @@ function adicionaDadosAluno() {
   }
 }
 
+function editarNotas(aluno) {
+  const formEdicao = document.createElement('form');
+  formEdicao.id = 'formEdicao';
   
+  const titulo = document.createElement('h2');
+  titulo.textContent = `Editar Notas de ${aluno.nome}`;
+  formEdicao.appendChild(titulo);
 
-  
+  const labelProva1 = document.createElement('label');
+  labelProva1.textContent = 'Nota da Prova 1:';
+  const inputProva1 = document.createElement('input');
+  inputProva1.type = 'number';
+  inputProva1.min = 0;
+  inputProva1.max = 8;
+  inputProva1.step = 0.1;
+  inputProva1.value = aluno.prova1 || '';
+  formEdicao.appendChild(labelProva1);
+  formEdicao.appendChild(inputProva1);
+
+  const labelAep1 = document.createElement('label');
+  labelAep1.textContent = 'Nota da AEP 1:';
+  const inputAep1 = document.createElement('input');
+  inputAep1.type = 'number';
+  inputAep1.min = 0;
+  inputAep1.max = 1;
+  inputAep1.step = 0.1;
+  inputAep1.value = aluno.aep1 || '';
+  formEdicao.appendChild(labelAep1);
+  formEdicao.appendChild(inputAep1);
+
+  const labelProvaIntegrada1 = document.createElement('label');
+  labelProvaIntegrada1.textContent = 'Nota da Prova Integrada 1:';
+  const inputProvaIntegrada1 = document.createElement('input');
+  inputProvaIntegrada1.type = 'number';
+  inputProvaIntegrada1.min = 0;
+  inputProvaIntegrada1.max = 1;
+  inputProvaIntegrada1.step = 0.1;
+  inputProvaIntegrada1.value = aluno.provaIntegrada1 || '';
+  formEdicao.appendChild(labelProvaIntegrada1);
+  formEdicao.appendChild(inputProvaIntegrada1);
+
+  const btnSalvar = document.createElement('button');
+  btnSalvar.textContent = 'Salvar';
+  btnSalvar.type = 'button';
+  btnSalvar.onclick = function() {
+    aluno.prova1 = parseFloat(inputProva1.value);
+    aluno.aep1 = parseFloat(inputAep1.value);
+    aluno.provaIntegrada1 = parseFloat(inputProvaIntegrada1.value);
+
+    // Calcular média 1
+    const med1 = ((aluno.prova1 * 0.8) + (aluno.aep1 * 0.1) + (aluno.provaIntegrada1 * 0.1)).toFixed(2);
+    aluno.med1 = parseFloat(med1);
+
+    // Atualizar no localStorage
+    const alunosArmazenados = localStorage.getItem('alunos');
+    if (alunosArmazenados) {
+      const alunos = JSON.parse(alunosArmazenados);
+      const index = alunos.findIndex(a => a.ra === aluno.ra);
+      if (index !== -1) {
+        alunos[index] = aluno;
+        localStorage.setItem('alunos', JSON.stringify(alunos));
+        carregarDadosDaTabela(); // Atualizar a tabela após salvar
+      }
+    }
+
+    formEdicao.remove(); // Remover o formulário de edição após salvar
+  };
+  formEdicao.appendChild(btnSalvar);
+
+  const btnCancelar = document.createElement('button');
+  btnCancelar.textContent = 'Cancelar';
+  btnCancelar.type = 'button';
+  btnCancelar.onclick = function() {
+    formEdicao.remove(); // Remover o formulário de edição ao cancelar
+  };
+  formEdicao.appendChild(btnCancelar);
+
+  document.body.appendChild(formEdicao);
+}
+
+function editarNotasBimestre2(aluno) {
+  if (verificarNotasBimestre1Adicionadas(aluno)) {
+      const novaNotaProva2 = prompt("Digite a nova nota da Prova 2:");
+      const novaNotaAep2 = prompt("Digite a nova nota da AEP 2:");
+      const novaNotaProvaIntegrada2 = prompt("Digite a nova nota da Prova Integrada 2:");
+    
+      // Verifica se o usuário inseriu todas as notas
+      if (novaNotaProva2 !== null && novaNotaAep2 !== null && novaNotaProvaIntegrada2 !== null) {
+        // Atualiza as notas do aluno
+        aluno.prova2 = parseFloat(novaNotaProva2);
+        aluno.aep2 = parseFloat(novaNotaAep2);
+        aluno.provaIntegrada2 = parseFloat(novaNotaProvaIntegrada2);
+    
+        // Recalcula as médias
+        aluno.med2 = ((aluno.prova2 * 0.8) + (aluno.aep2 * 0.1) + (aluno.provaIntegrada2 * 0.1)).toFixed(2);
+        aluno.medFinal = ((parseFloat(aluno.med1) + parseFloat(aluno.med2)) / 2).toFixed(2);
+    
+        // Determina o status de aprovação
+        if (aluno.medFinal >= 6) {
+          aluno.status = "Aprovado";
+        } else if (aluno.medFinal < 6 && aluno.medFinal >= 3) {
+          aluno.status = "Recuperação";
+        } else {
+          aluno.status = "Reprovado";
+        }
+    
+        // Atualiza os dados do aluno no localStorage
+        const alunosArmazenados = JSON.parse(localStorage.getItem('alunos'));
+        const indice = alunosArmazenados.findIndex(item => item.ra === aluno.ra);
+        alunosArmazenados[indice] = aluno;
+        localStorage.setItem('alunos', JSON.stringify(alunosArmazenados));
+    
+        // Atualiza a tabela
+        carregarDadosDaTabela();
+      }
+    }
+}  
+
+function verificarNotasBimestre1Adicionadas(aluno) {
+  return aluno.prova1 !== null && aluno.aep1 !== null && aluno.provaIntegrada1 !== null;
+}
+
