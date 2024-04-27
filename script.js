@@ -36,8 +36,8 @@ function adicionaDadosAluno() {
 
   
   // Calcule as médias e o status de aprovação
-    const med1 = null;
-    const med2 = null;
+    let med1 = null;
+    let med2 = null;
     let medFinal = null
 /*****************************Fun��es*****************************************************/
   
