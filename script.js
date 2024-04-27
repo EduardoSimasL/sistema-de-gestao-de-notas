@@ -33,16 +33,14 @@ function adicionaDadosAluno() {
         aep2 = parseFloat(inputAep2.value);
         provaIntegrada2 = parseFloat(inputProvaIntegrada2.value);
     }
-  
-    // Realize as validações necessárias
 
   
-    // Calcule as médias e o status de aprovação
+  // Calcule as médias e o status de aprovação
     const med1 = null;
-    const med2= null;
-    let medFinal;
-    /*****************************Fun��es*****************************************************/
-    function calculo_media(){
+    const med2 = null;
+    let medFinal = null
+/*****************************Fun��es*****************************************************/
+  
     //calculo da m�dia do primeiro bimestre
     med1 = ((prova1 * 0.8) + (aep1 * 0.1) + (provaIntegrada1 * 0.1)).toFixed(2);
     valorCelula = med1; // Formata a m�dia para 2 casas decimais
@@ -57,28 +55,25 @@ function adicionaDadosAluno() {
         medFinal = ((med1 + med2)/2);
         valorCelula = medFinal; // Formata a m�dia para 2 casas decimais
     }
-    else {
+   else {
         // Se as notas do primeiro bimestre n�o estiverem preenchidas, exibir uma mensagem de erro
         erro = "Por favor, insira as notas do primeiro bimestre antes de inserir as do segundo bimestre."
         console.log("Por favor, insira as notas do primeiro bimestre antes de inserir as do segundo bimestre.");
     }
-    }
-
+    
     //Status de aprova��o:
-    function status(){
-        //v�riavel que armazena o status de aprova��o do aluno
-        let status_aluno;
+  
+    //v�riavel que armazena o status de aprova��o do aluno
+    let status_aluno;
 
-        if(medFinal >= 6) {
-            status_aluno = "Aprovado"
-        }
-        if(medFinal < 6 && medFinal >= 3) {
-            status_aluno = "Recupera��o"
-        }
-        else {
-            status_aluno = "Reprovado"
-        }
-
+    if(medFinal >= 6) {
+        status_aluno = "Aprovado"
+    }
+    if(medFinal < 6 && medFinal >= 3) {
+        status_aluno = "Recupera��o"
+    }
+    else {
+        status_aluno = "Reprovado"
     }
 
 
