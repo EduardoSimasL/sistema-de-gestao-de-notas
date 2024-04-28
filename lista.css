@@ -48,7 +48,7 @@ li {
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #f5f5f5;
+    background-color: #ffffff;
     margin: 0;
     padding: 0;
   }
@@ -57,7 +57,7 @@ body {
     max-width: 800px;
     margin: 20px auto;
     padding: 20px;
-    background-color: #fff;
+    background-color: hsl(0, 0%, 100%);
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   }
@@ -91,7 +91,7 @@ body {
   form button {
     width: 100%;
     padding: 10px;
-    background-color: #007bff;
+    background-color: #9a02ff;
     color: #fff;
     border: none;
     border-radius: 4px;
@@ -99,7 +99,7 @@ body {
   }
   
   form button:hover {
-    background-color: #0056b3;
+    background-color: #353b35;
   }
   
   /* Tabela de alunos */
@@ -116,6 +116,88 @@ body {
   }
   
   th {
-    background-color: #007bff;
+    background-color: #353b83;
     color: #fff;
   }
+
+  /* Edição */
+#Conteiner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+#formEdicao {
+  border: 1px solid #353b83;
+  padding: 20px;
+  max-width: 400px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#formEdicao h2 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 24px;
+  color: #353b83;
+}
+
+#formEdicao label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 16px;
+  color: #333;
+}
+
+#formEdicao input[type="number"] {
+  width: calc(50% - 8px);
+  padding: 10px;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+#formEdicao button {
+  padding: 10px 20px;
+  background-color: #353b83;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+#formEdicao button:hover {
+  background-color: #353b83;
+}
+.btnAcao {
+  padding: 8px 16px;
+  background-color: #353b83;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s;
+  margin-right: 8px; 
+}
+
+.btnAcao:hover {
+  background-color: #353b83;
+}
+#titulo {
+  color: #353b83; 
+}
+.aprovado {
+  color: green; 
+}
+
+.reprovado {
+  color: red; 
+}
+
+

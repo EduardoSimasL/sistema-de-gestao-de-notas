@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,32 +8,26 @@
   <link rel="stylesheet" href="lista.css">
   <link rel="website icon" type="png" href="./Img/Educ_1.png">
 </head>
+
 <body>
   <header>
     <a href="./Index.html"><img id="logo" src="./Img/Educ_1.png"></a>
-        <nav>
-            <ul>
-              <a href="./Alunos.html">
-                <li>Cadastro de alunos</li> 
-            </a>
+    <nav>
+      <ul>
+        <a href="./Alunos.html">
+          <li>Cadastro de alunos</li>
+        </a>
 
-            <a href="./Lista.html">
-                <li>Lista de alunos</li>
-            </a>
-
-            <a href="./Notas.html">
-                <li>Cadastro de notas</li>
-            </a>
-
-                <a href="">
-                    <li>Sair</li>
-                </a>
-            </ul>
-        </nav>
+        <a href="./Lista.html">
+          <li>Gestão de Notas</li>
+        </a>
+        <a href="">
+          <li>Sair</li>
+        </a>
+      </ul>
+    </nav>
   </header>
-
-  <h1>Gestão de Notas</h1>
-
+  <h1 id="titulo">Gestão de Notas</h1>
   <table id="tabelaAlunos">
     <thead>
       <tr>
@@ -49,14 +44,17 @@
         <th>Média 2</th>
         <th>Média Final</th>
         <th>Status</th>
-        <th>Ações</th> 
+        <th>Ações</th>
       </tr>
     </thead>
     <tbody>
+      <td class="aprovado">Aprovado</td>
+      <td class="reprovado">Reprovado</td>
       <!-- Os dados dos alunos serão inseridos aqui dinamicamente com JavaScript -->
     </tbody>
   </table>
 
   <script src="script.js"></script>
 </body>
+
 </html>
