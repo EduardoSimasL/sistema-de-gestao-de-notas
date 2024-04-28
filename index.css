@@ -1,0 +1,141 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  list-style: none;
+  background-color: rgb(24, 24, 50);
+}
+
+header {
+  height: 75px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: rgb(53, 59, 131);
+}   
+
+nav {
+  width: 60%;
+}
+
+ul {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  background-color: rgb(53, 59, 131);
+}
+
+li {
+  list-style: none;
+  color: white;
+  cursor: pointer;
+  font-size: 19px;
+  background-color: rgb(53, 59, 131);
+}
+
+#logo {
+  width: 140px;
+  height: auto;
+  background-color: rgb(53, 59, 131);
+}
+ 
+body {
+  font-family: Arial, sans-serif;
+  background-color: rgb(24, 24, 50);
+}
+
+.container {
+  max-width: 400px;
+  margin: 100px auto;
+  padding: 20px;
+  background-color: rgb(53, 59, 131);
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgb(24, 24, 50);
+}
+
+.logo {
+  text-align: center;
+  margin-bottom: 30px; 
+  background-color: rgb(53, 59, 131);
+}
+
+.logo img {
+  width: 150px;
+  height: auto;
+  display: block; 
+  margin-left: 100px;
+  background-color: rgb(53, 59, 131);
+}
+
+.form {
+  margin-top: 20px;
+  background-color: rgb(53, 59, 131);
+}
+
+.form label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: white;
+  background-color: rgb(53, 59, 131);
+  
+}
+
+.form input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px;
+  border-radius: 5px;
+  background-color: rgb(53, 59, 131);
+  box-shadow: 1px 1px 6px rgb(24, 24, 50);
+  color: white;
+}
+
+.form button {
+  width: 100%;
+  padding: 10px;
+  background-color: rgb(53, 59, 131);
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  box-shadow: 1px 1px 6px rgb(24, 24, 50);
+}
+
+#loginForm {
+  background-color: rgb(53, 59, 131);
+}
+
+
+.form button:hover {
+  background-color: rgb(24, 24, 50);
+  color: white;
+}
+
+.form input:hover {
+  background-color: rgb(24, 24, 50);
+}
+
+h4 {
+  background-color: rgb(53, 59, 131);
+  color: white;
+  font-weight: bold;
+  padding-top: 25px;
+}
+
+button {
+  background-color: rgb(53, 59, 131);
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  box-shadow: 1px 1px 6px rgb(24, 24, 50);
+  width: 50%;
+  padding: 10px;
+}
+
+button:hover {
+  background-color: rgb(24, 24, 50);
+}
