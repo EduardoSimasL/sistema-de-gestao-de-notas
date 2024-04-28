@@ -76,27 +76,27 @@ function carregarDadosDaTabela() {
           novaLinha.insertCell(11).textContent = aluno.medFinal || '';
           novaLinha.insertCell(12).textContent = aluno.status || '';
           
-          // Adiciona os botões de editar notas
+          // Adiciona os botoes de editar notas
           const cellAcoes = novaLinha.insertCell(13);
           const btnEditar1 = document.createElement('button');
-          btnEditar1.textContent = 'Editar 1º Bimestre';
+          btnEditar1.textContent = '1 Bimestre';
           btnEditar1.onclick = function() {
             editarNotas(aluno);
           };
           cellAcoes.appendChild(btnEditar1);
 
           const btnEditar2 = document.createElement('button');
-          btnEditar2.textContent = 'Editar 2º Bimestre';
+          btnEditar2.textContent = '2 Bimestre';
           btnEditar2.onclick = function() {
             if (verificarNotasBimestre1Adicionadas(aluno)) {
               editarNotasBimestre2(aluno);
             } else {
-              alert("Por favor, preencha as notas do 1º Bimestre primeiro.");
+              alert("Por favor, preencha as notas do Bimestre 1.");
             }
           };
           cellAcoes.appendChild(btnEditar2);
           
-          // Adiciona o botão de exclusão
+          // Adiciona o botao de exclusao
           const btnExcluir = document.createElement('button');
           btnExcluir.textContent = 'Excluir';
           btnExcluir.onclick = function() {
@@ -106,10 +106,10 @@ function carregarDadosDaTabela() {
         });
       }
     } else {
-      console.log("A tabela não possui um corpo (tbody).");
+      console.log("A tabela nao possui um corpo (tbody).");
     }
   } else {
-    console.log("A tabela não foi encontrada.");
+    console.log("A tabela nao foi encontrada.");
   }
 }
 
@@ -316,7 +316,7 @@ function excluirAluno(aluno) {
     if (index !== -1) {
       alunosArmazenados.splice(index, 1);
       localStorage.setItem('alunos', JSON.stringify(alunosArmazenados));
-      carregarDadosDaTabela(); // Recarrega os dados da tabela após a exclusão
+      carregarDadosDaTabela(); 
     }
   }
 }
