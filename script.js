@@ -1,4 +1,5 @@
 let formEdicao;
+
 window.onload = function() {
   carregarDadosDaTabela();
 };
@@ -76,7 +77,7 @@ function carregarDadosDaTabela() {
           novaLinha.insertCell(11).textContent = aluno.medFinal || '';
           novaLinha.insertCell(12).textContent = aluno.status || '';
           
-          // Adiciona os botoes de editar notas
+          // Adiciona os botões de editar notas
           const cellAcoes = novaLinha.insertCell(13);
           const btnEditar1 = document.createElement('button');
           btnEditar1.textContent = '1 Bimestre';
@@ -96,7 +97,7 @@ function carregarDadosDaTabela() {
           };
           cellAcoes.appendChild(btnEditar2);
           
-          // Adiciona o botao de exclusao
+          // Adiciona o botão de exclusão
           const btnExcluir = document.createElement('button');
           btnExcluir.textContent = 'Excluir';
           btnExcluir.onclick = function() {
@@ -106,15 +107,12 @@ function carregarDadosDaTabela() {
         });
       }
     } else {
-      console.log("A tabela nao possui um corpo (tbody).");
+      console.log("A tabela não possui um corpo (tbody).");
     }
   } else {
-    console.log("A tabela nao foi encontrada.");
+    console.log("A tabela não foi encontrada.");
   }
 }
-
-
-
 
 function editarNotas(aluno) {
   if (formEdicao) {
@@ -125,12 +123,13 @@ function editarNotas(aluno) {
   formEdicao.id = 'formEdicao';
   
   const titulo = document.createElement('h2');
-  titulo.textContent = `Editar Notas do Primeiro Bimestre de ${aluno.nome}`;
+  titulo.textContent = `Editar Notas de ${aluno.nome}`;
   formEdicao.appendChild(titulo);
 
   const labelProva1 = document.createElement('label');
   labelProva1.textContent = 'Nota da Prova 1:';
   const inputProva1 = document.createElement('input');
+  inputProva1.id = 'input_prova_1';
   inputProva1.type = 'number';
   inputProva1.min = 0;
   inputProva1.max = 8;
@@ -142,6 +141,7 @@ function editarNotas(aluno) {
   const labelAep1 = document.createElement('label');
   labelAep1.textContent = 'Nota da AEP 1:';
   const inputAep1 = document.createElement('input');
+  inputAep1.id = 'input_aep_1';
   inputAep1.type = 'number';
   inputAep1.min = 0;
   inputAep1.max = 1;
@@ -153,6 +153,7 @@ function editarNotas(aluno) {
   const labelProvaIntegrada1 = document.createElement('label');
   labelProvaIntegrada1.textContent = 'Nota da Prova Integrada 1:';
   const inputProvaIntegrada1 = document.createElement('input');
+  inputProvaIntegrada1.id = 'input_prova_integrada_1';
   inputProvaIntegrada1.type = 'number';
   inputProvaIntegrada1.min = 0;
   inputProvaIntegrada1.max = 1;
@@ -200,7 +201,6 @@ function editarNotas(aluno) {
   document.body.appendChild(formEdicao);
 }
 
-
 function editarNotasBimestre2(aluno) {
   if (formEdicao) {
     formEdicao.remove(); // Remover o formulário de edição anterior, se existir
@@ -216,6 +216,7 @@ function editarNotasBimestre2(aluno) {
   const labelProva2 = document.createElement('label');
   labelProva2.textContent = 'Nota da Prova 2:';
   const inputProva2 = document.createElement('input');
+  inputProva2.id = 'input_prova_2';
   inputProva2.type = 'number';
   inputProva2.min = 0;
   inputProva2.max = 8;
@@ -227,6 +228,7 @@ function editarNotasBimestre2(aluno) {
   const labelAep2 = document.createElement('label');
   labelAep2.textContent = 'Nota da AEP 2:';
   const inputAep2 = document.createElement('input');
+  inputAep2.id = 'input_aep_2';
   inputAep2.type = 'number';
   inputAep2.min = 0;
   inputAep2.max = 1;
@@ -238,6 +240,7 @@ function editarNotasBimestre2(aluno) {
   const labelProvaIntegrada2 = document.createElement('label');
   labelProvaIntegrada2.textContent = 'Nota da Prova Integrada 2:';
   const inputProvaIntegrada2 = document.createElement('input');
+  inputProvaIntegrada2.id = 'input_prova_integrada_2';
   inputProvaIntegrada2.type = 'number';
   inputProvaIntegrada2.min = 0;
   inputProvaIntegrada2.max = 1;
@@ -302,12 +305,9 @@ function editarNotasBimestre2(aluno) {
   document.body.appendChild(formEdicao);
 }
 
-
-
 function verificarNotasBimestre1Adicionadas(aluno) {
   return aluno.prova1 !== null && aluno.aep1 !== null && aluno.provaIntegrada1 !== null;
 }
-
 
 function excluirAluno(aluno) {
   const alunosArmazenados = JSON.parse(localStorage.getItem('alunos'));
