@@ -15,7 +15,7 @@
   </header>
 
   <div class="form">
-
+ 
   </div>
 
   <!DOCTYPE html>   
@@ -25,7 +25,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" href="Login.css">
+    <link rel="stylesheet" href="index.css">
   </head>
   <body>
     <div class="container">
@@ -34,32 +34,32 @@
         <img src="./Img/Educ_1.png" alt="Logo">
       </div>
       <div class="form">
-        <form id="loginForm">
+        <form id="loginForm" onsubmit="login(); return false;">
           <label for="username">Nome de Usuário ou E-mail:</label>
           <input type="text" id="username" name="username" placeholder="Digite seu nome ou E-mail" required>
           <label for="password">Senha:</label>
           <input type="password" id="password" name="password" placeholder="Digite sua senha" required>
-          <button type="submit" onclick="login()">Entrar</button>
+          <button type="submit">Entrar</button>
         </form>
       </div>
     </div>
-
-<script>
-   function login() {
+  
+    <script>
+      function login() {
         var username = document.getElementById('username').value;
         var password = document.getElementById('password').value;
   
-      if (username.trim() !== '' && password.trim() !== '') {
+        if (username.trim() === '' || password.trim() === '') {
+          alert('Por favor, preencha ambos os campos de login.');
+        } else {
           localStorage.setItem('educUsername', username);
           localStorage.setItem('educPassword', password);
-          alert('Login Realizado com Sucesso!!');       
-      } else {
-  
-          alert('Porfavor Informe o Login e a Senha');
-       }
+          alert('Login realizado com sucesso!');
+          window.location.href = "./Alunos.html";
+        }
       }
-
-  window.onload = function() {
+  
+      window.onload = function() {
         var savedUsername = localStorage.getItem('educUsername');
         var savedPassword = localStorage.getItem('educPassword');
   
@@ -68,8 +68,7 @@
           document.getElementById('password').value = savedPassword;
         }
       };
-
-</script>
+    </script>
   </body>
 
   </html>
