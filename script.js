@@ -76,34 +76,43 @@ function carregarDadosDaTabela() {
           novaLinha.insertCell(11).textContent = aluno.medFinal || '';
           novaLinha.insertCell(12).textContent = aluno.status || '';
           
-          // Adiciona os botÃµes de editar notas
+          // Adiciona os botões de editar notas
           const cellAcoes = novaLinha.insertCell(13);
           const btnEditar1 = document.createElement('button');
-          btnEditar1.textContent = 'Editar 1Âº Bimestre';
+          btnEditar1.textContent = 'Editar 1º Bimestre';
           btnEditar1.onclick = function() {
             editarNotas(aluno);
           };
           cellAcoes.appendChild(btnEditar1);
 
           const btnEditar2 = document.createElement('button');
-          btnEditar2.textContent = 'Editar 2Âº Bimestre';
+          btnEditar2.textContent = 'Editar 2º Bimestre';
           btnEditar2.onclick = function() {
             if (verificarNotasBimestre1Adicionadas(aluno)) {
               editarNotasBimestre2(aluno);
             } else {
-              alert("Por favor, preencha as notas do 1Âº Bimestre primeiro.");
+              alert("Por favor, preencha as notas do 1º Bimestre primeiro.");
             }
           };
           cellAcoes.appendChild(btnEditar2);
+          
+          // Adiciona o botão de exclusão
+          const btnExcluir = document.createElement('button');
+          btnExcluir.textContent = 'Excluir';
+          btnExcluir.onclick = function() {
+            excluirAluno(aluno);
+          };
+          cellAcoes.appendChild(btnExcluir);
         });
       }
     } else {
-      console.log("A tabela nÃ£o possui um corpo (tbody).");
+      console.log("A tabela não possui um corpo (tbody).");
     }
   } else {
-    console.log("A tabela nÃ£o foi encontrada.");
+    console.log("A tabela não foi encontrada.");
   }
 }
+
 
 
 
@@ -299,3 +308,15 @@ function verificarNotasBimestre1Adicionadas(aluno) {
   return aluno.prova1 !== null && aluno.aep1 !== null && aluno.provaIntegrada1 !== null;
 }
 
+
+function excluirAluno(aluno) {
+  const alunosArmazenados = JSON.parse(localStorage.getItem('alunos'));
+  if (alunosArmazenados) {
+    const index = alunosArmazenados.findIndex(item => item.ra === aluno.ra);
+    if (index !== -1) {
+      alunosArmazenados.splice(index, 1);
+      localStorage.setItem('alunos', JSON.stringify(alunosArmazenados));
+      carregarDadosDaTabela(); // Recarrega os dados da tabela após a exclusão
+    }
+  }
+}
