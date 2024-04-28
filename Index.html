@@ -45,20 +45,28 @@
     </div>
   
     <script>
+      function isValidEmail(email) {
+      
+        var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+      }
+
       function login() {
         var username = document.getElementById('username').value;
         var password = document.getElementById('password').value;
   
         if (username.trim() === '' || password.trim() === '') {
-          alert('Por favor, preencha ambos os campos de login.');
-        } else {
-          localStorage.setItem('educUsername', username);
-          localStorage.setItem('educPassword', password);
-          alert('Login realizado com sucesso!');
-          window.location.href = "./Alunos.html";
-        }
+        alert('Por favor, preencha ambos os campos de login.');
+      } else if (!isValidEmail(username)) {
+        alert('Por favor, insira um email válido.');
+      } else {
+        localStorage.setItem('educUsername', username);
+        localStorage.setItem('educPassword', password);
+        alert('Login realizado com sucesso!');
+        window.location.href = "./Alunos.html";
       }
-  
+    }
+    
       window.onload = function() {
         var savedUsername = localStorage.getItem('educUsername');
         var savedPassword = localStorage.getItem('educPassword');
