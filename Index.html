@@ -14,15 +14,15 @@
     <a href="./Index.html"><img id="logo" src="./Img/Educ_1.png"></a>
     <nav>
       <ul>
-        <a href="./Alunos.html">
+        <a href="">
           <li>Cadastro de alunos</li>
         </a>
 
-        <a href="./Lista.html">
+        <a href="">
           <li>Lista de alunos</li>
         </a>
 
-        <a href="./Notas.html">
+        <a href="">
           <li>Cadastro de notas</li>
         </a>
 
@@ -37,11 +37,6 @@
 
   </div>
 
- 
-  <!--Login -->
-
-<!-- ? -->
-
   <!DOCTYPE html>   
   <html lang="pt-BR">
 
@@ -51,11 +46,6 @@
     <title>Login</title>
     <link rel="stylesheet" href="Login.css">
   </head>
-
-<!-- ? -->
-
-
-
   <body>
     <div class="container">
       <div class="logo">
@@ -68,7 +58,7 @@
           <input type="text" id="username" name="username" placeholder="Digite seu nome ou E-mail" required>
           <label for="password">Senha:</label>
           <input type="password" id="password" name="password" placeholder="Digite sua senha" required>
-          <button type="submit">Entrar</button>
+          <button type="submit" onclick="login()">Entrar</button>
         </form>
       </div>
       <div>
@@ -77,6 +67,33 @@
       <button onclick="window.location.href='./Alunos.html'">Cadastre-se</button>
     </div>
     </div>
+
+<script>
+   function login() {
+        var username = document.getElementById('username').value;
+        var password = document.getElementById('password').value;
+  
+      if (username.trim() !== '' && password.trim() !== '') {
+          localStorage.setItem('educUsername', username);
+          localStorage.setItem('educPassword', password);
+          alert('Login Realizado com Sucesso!!');       
+      } else {
+  
+          alert('Porfavor Informe o Login e a Senha');
+       }
+      }
+
+  window.onload = function() {
+        var savedUsername = localStorage.getItem('educUsername');
+        var savedPassword = localStorage.getItem('educPassword');
+  
+        if (savedUsername && savedPassword) {
+          document.getElementById('username').value = savedUsername;
+          document.getElementById('password').value = savedPassword;
+        }
+      };
+
+</script>
   </body>
 
   </html>
