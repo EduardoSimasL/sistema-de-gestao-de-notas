@@ -1,3 +1,4 @@
+let formEdicao;
 window.onload = function() {
   carregarDadosDaTabela();
 };
@@ -74,17 +75,26 @@ function carregarDadosDaTabela() {
           novaLinha.insertCell(10).textContent = aluno.med2 || '';
           novaLinha.insertCell(11).textContent = aluno.medFinal || '';
           novaLinha.insertCell(12).textContent = aluno.status || '';
-          novaLinha.insertCell(13).innerHTML = `<button onclick="editarNotasBimestre2(${JSON.stringify(aluno)})">Editar</button>`;
-
-
-          // Adiciona botão de edição
+          
+          // Adiciona os botões de editar notas
           const cellAcoes = novaLinha.insertCell(13);
-          const btnEditar = document.createElement('button');
-          btnEditar.textContent = 'Editar';
-          btnEditar.onclick = function() {
+          const btnEditar1 = document.createElement('button');
+          btnEditar1.textContent = 'Editar 1º Bimestre';
+          btnEditar1.onclick = function() {
             editarNotas(aluno);
           };
-          cellAcoes.appendChild(btnEditar);
+          cellAcoes.appendChild(btnEditar1);
+
+          const btnEditar2 = document.createElement('button');
+          btnEditar2.textContent = 'Editar 2º Bimestre';
+          btnEditar2.onclick = function() {
+            if (verificarNotasBimestre1Adicionadas(aluno)) {
+              editarNotasBimestre2(aluno);
+            } else {
+              alert("Por favor, preencha as notas do 1º Bimestre primeiro.");
+            }
+          };
+          cellAcoes.appendChild(btnEditar2);
         });
       }
     } else {
@@ -95,12 +105,18 @@ function carregarDadosDaTabela() {
   }
 }
 
+
+
 function editarNotas(aluno) {
-  const formEdicao = document.createElement('form');
+  if (formEdicao) {
+    formEdicao.remove(); // Remover o formulário de edição anterior, se existir
+  }
+
+  formEdicao = document.createElement('form');
   formEdicao.id = 'formEdicao';
   
   const titulo = document.createElement('h2');
-  titulo.textContent = `Editar Notas de ${aluno.nome}`;
+  titulo.textContent = `Editar Notas do Primeiro Bimestre de ${aluno.nome}`;
   formEdicao.appendChild(titulo);
 
   const labelProva1 = document.createElement('label');
@@ -175,43 +191,109 @@ function editarNotas(aluno) {
   document.body.appendChild(formEdicao);
 }
 
+
 function editarNotasBimestre2(aluno) {
-  if (verificarNotasBimestre1Adicionadas(aluno)) {
-      const novaNotaProva2 = prompt("Digite a nova nota da Prova 2:");
-      const novaNotaAep2 = prompt("Digite a nova nota da AEP 2:");
-      const novaNotaProvaIntegrada2 = prompt("Digite a nova nota da Prova Integrada 2:");
-    
-      // Verifica se o usuário inseriu todas as notas
-      if (novaNotaProva2 !== null && novaNotaAep2 !== null && novaNotaProvaIntegrada2 !== null) {
-        // Atualiza as notas do aluno
-        aluno.prova2 = parseFloat(novaNotaProva2);
-        aluno.aep2 = parseFloat(novaNotaAep2);
-        aluno.provaIntegrada2 = parseFloat(novaNotaProvaIntegrada2);
-    
-        // Recalcula as médias
-        aluno.med2 = ((aluno.prova2 * 0.8) + (aluno.aep2 * 0.1) + (aluno.provaIntegrada2 * 0.1)).toFixed(2);
-        aluno.medFinal = ((parseFloat(aluno.med1) + parseFloat(aluno.med2)) / 2).toFixed(2);
-    
-        // Determina o status de aprovação
-        if (aluno.medFinal >= 6) {
-          aluno.status = "Aprovado";
-        } else if (aluno.medFinal < 6 && aluno.medFinal >= 3) {
-          aluno.status = "Recuperação";
-        } else {
-          aluno.status = "Reprovado";
-        }
-    
-        // Atualiza os dados do aluno no localStorage
-        const alunosArmazenados = JSON.parse(localStorage.getItem('alunos'));
-        const indice = alunosArmazenados.findIndex(item => item.ra === aluno.ra);
-        alunosArmazenados[indice] = aluno;
-        localStorage.setItem('alunos', JSON.stringify(alunosArmazenados));
-    
-        // Atualiza a tabela
-        carregarDadosDaTabela();
+  if (formEdicao) {
+    formEdicao.remove(); // Remover o formulário de edição anterior, se existir
+  }
+
+  formEdicao = document.createElement('form');
+  formEdicao.id = 'formEdicao';
+  
+  const titulo = document.createElement('h2');
+  titulo.textContent = `Editar Notas do Segundo Bimestre de ${aluno.nome}`;
+  formEdicao.appendChild(titulo);
+
+  const labelProva2 = document.createElement('label');
+  labelProva2.textContent = 'Nota da Prova 2:';
+  const inputProva2 = document.createElement('input');
+  inputProva2.type = 'number';
+  inputProva2.min = 0;
+  inputProva2.max = 8;
+  inputProva2.step = 0.1;
+  inputProva2.value = aluno.prova2 || '';
+  formEdicao.appendChild(labelProva2);
+  formEdicao.appendChild(inputProva2);
+
+  const labelAep2 = document.createElement('label');
+  labelAep2.textContent = 'Nota da AEP 2:';
+  const inputAep2 = document.createElement('input');
+  inputAep2.type = 'number';
+  inputAep2.min = 0;
+  inputAep2.max = 1;
+  inputAep2.step = 0.1;
+  inputAep2.value = aluno.aep2 || '';
+  formEdicao.appendChild(labelAep2);
+  formEdicao.appendChild(inputAep2);
+
+  const labelProvaIntegrada2 = document.createElement('label');
+  labelProvaIntegrada2.textContent = 'Nota da Prova Integrada 2:';
+  const inputProvaIntegrada2 = document.createElement('input');
+  inputProvaIntegrada2.type = 'number';
+  inputProvaIntegrada2.min = 0;
+  inputProvaIntegrada2.max = 1;
+  inputProvaIntegrada2.step = 0.1;
+  inputProvaIntegrada2.value = aluno.provaIntegrada2 || '';
+  formEdicao.appendChild(labelProvaIntegrada2);
+  formEdicao.appendChild(inputProvaIntegrada2);
+
+  const btnSalvar = document.createElement('button');
+  btnSalvar.textContent = 'Salvar';
+  btnSalvar.type = 'button';
+  btnSalvar.onclick = function() {
+    const novaNotaProva2 = parseFloat(inputProva2.value);
+    const novaNotaAep2 = parseFloat(inputAep2.value);
+    const novaNotaProvaIntegrada2 = parseFloat(inputProvaIntegrada2.value);
+
+    // Verifica se todas as notas foram preenchidas
+    if (novaNotaProva2 !== null && novaNotaAep2 !== null && novaNotaProvaIntegrada2 !== null) {
+      aluno.prova2 = novaNotaProva2;
+      aluno.aep2 = novaNotaAep2;
+      aluno.provaIntegrada2 = novaNotaProvaIntegrada2;
+
+      // Calcula a média do segundo bimestre
+      aluno.med2 = ((aluno.prova2 * 0.8) + (aluno.aep2 * 0.1) + (aluno.provaIntegrada2 * 0.1)).toFixed(2);
+
+      // Calcula a média final
+      aluno.medFinal = ((parseFloat(aluno.med1) + parseFloat(aluno.med2)) / 2).toFixed(2);
+
+      // Determina o status de aprovação
+      if (aluno.medFinal >= 6) {
+        aluno.status = "Aprovado";
+      } else if (aluno.medFinal < 6 && aluno.medFinal >= 3) {
+        aluno.status = "Recuperação";
+      } else {
+        aluno.status = "Reprovado";
       }
+
+      // Atualiza os dados do aluno no localStorage
+      const alunosArmazenados = JSON.parse(localStorage.getItem('alunos'));
+      const index = alunosArmazenados.findIndex(item => item.ra === aluno.ra);
+      alunosArmazenados[index] = aluno;
+      localStorage.setItem('alunos', JSON.stringify(alunosArmazenados));
+
+      // Atualiza a tabela
+      carregarDadosDaTabela();
+      
+      formEdicao.remove(); // Remover o formulário de edição após salvar
+    } else {
+      alert("Por favor, preencha todas as notas.");
     }
-}  
+  };
+  formEdicao.appendChild(btnSalvar);
+
+  const btnCancelar = document.createElement('button');
+  btnCancelar.textContent = 'Cancelar';
+  btnCancelar.type = 'button';
+  btnCancelar.onclick = function() {
+    formEdicao.remove(); // Remover o formulário de edição ao cancelar
+  };
+  formEdicao.appendChild(btnCancelar);
+
+  document.body.appendChild(formEdicao);
+}
+
+
 
 function verificarNotasBimestre1Adicionadas(aluno) {
   return aluno.prova1 !== null && aluno.aep1 !== null && aluno.provaIntegrada1 !== null;
