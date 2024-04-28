@@ -166,27 +166,41 @@ function editarNotas(aluno) {
   btnSalvar.textContent = 'Salvar';
   btnSalvar.type = 'button';
   btnSalvar.onclick = function() {
-    aluno.prova1 = parseFloat(inputProva1.value);
-    aluno.aep1 = parseFloat(inputAep1.value);
-    aluno.provaIntegrada1 = parseFloat(inputProvaIntegrada1.value);
+    const novaNotaProva1 = parseFloat(inputProva1.value);
+    const novaNotaAep1 = parseFloat(inputAep1.value);
+    const novaNotaProvaIntegrada1 = parseFloat(inputProvaIntegrada1.value);
 
-    // Calcular média 1
-    const med1 = ((aluno.prova1 * 0.8) + (aluno.aep1 * 0.1) + (aluno.provaIntegrada1 * 0.1)).toFixed(2);
-    aluno.med1 = parseFloat(med1);
+    // Verifica se todas as notas foram preenchidas
+    if (!isNaN(novaNotaProva1) && !isNaN(novaNotaAep1) && !isNaN(novaNotaProvaIntegrada1)) {
+      // Limita as notas aos valores máximos permitidos
+      const notaProva1 = Math.min(novaNotaProva1, 8);
+      const notaAep1 = Math.min(novaNotaAep1, 1);
+      const notaProvaIntegrada1 = Math.min(novaNotaProvaIntegrada1, 1);
 
-    // Atualizar no localStorage
-    const alunosArmazenados = localStorage.getItem('alunos');
-    if (alunosArmazenados) {
-      const alunos = JSON.parse(alunosArmazenados);
-      const index = alunos.findIndex(a => a.ra === aluno.ra);
-      if (index !== -1) {
-        alunos[index] = aluno;
-        localStorage.setItem('alunos', JSON.stringify(alunos));
-        carregarDadosDaTabela(); // Atualizar a tabela após salvar
+      aluno.prova1 = notaProva1;
+      aluno.aep1 = notaAep1;
+      aluno.provaIntegrada1 = notaProvaIntegrada1;
+
+      // Calcular média 1 e garantir que esteja dentro do intervalo [0, 10]
+      const med1 = Math.max(0, Math.min(((notaProva1 * 0.8) + (notaAep1 * 0.1) + (notaProvaIntegrada1 * 0.1)).toFixed(2), 10));
+      aluno.med1 = med1;
+
+      // Atualizar no localStorage
+      const alunosArmazenados = localStorage.getItem('alunos');
+      if (alunosArmazenados) {
+        const alunos = JSON.parse(alunosArmazenados);
+        const index = alunos.findIndex(a => a.ra === aluno.ra);
+        if (index !== -1) {
+          alunos[index] = aluno;
+          localStorage.setItem('alunos', JSON.stringify(alunos));
+          carregarDadosDaTabela(); // Atualizar a tabela após salvar
+        }
       }
-    }
 
-    formEdicao.remove(); // Remover o formulário de edição após salvar
+      formEdicao.remove(); // Remover o formulário de edição após salvar
+    } else {
+      alert("Por favor, preencha todas as notas com valores válidos.");
+    }
   };
   formEdicao.appendChild(btnSalvar);
 
@@ -258,16 +272,22 @@ function editarNotasBimestre2(aluno) {
     const novaNotaProvaIntegrada2 = parseFloat(inputProvaIntegrada2.value);
 
     // Verifica se todas as notas foram preenchidas
-    if (novaNotaProva2 !== null && novaNotaAep2 !== null && novaNotaProvaIntegrada2 !== null) {
-      aluno.prova2 = novaNotaProva2;
-      aluno.aep2 = novaNotaAep2;
-      aluno.provaIntegrada2 = novaNotaProvaIntegrada2;
+    if (!isNaN(novaNotaProva2) && !isNaN(novaNotaAep2) && !isNaN(novaNotaProvaIntegrada2)) {
+      // Limita as notas aos valores máximos permitidos
+      const notaProva2 = Math.min(novaNotaProva2, 8);
+      const notaAep2 = Math.min(novaNotaAep2, 1);
+      const notaProvaIntegrada2 = Math.min(novaNotaProvaIntegrada2, 1);
 
-      // Calcula a média do segundo bimestre
-      aluno.med2 = ((aluno.prova2 * 0.8) + (aluno.aep2 * 0.1) + (aluno.provaIntegrada2 * 0.1)).toFixed(2);
+      aluno.prova2 = notaProva2;
+      aluno.aep2 = notaAep2;
+      aluno.provaIntegrada2 = notaProvaIntegrada2;
 
-      // Calcula a média final
-      aluno.medFinal = ((parseFloat(aluno.med1) + parseFloat(aluno.med2)) / 2).toFixed(2);
+      // Calcular média 2 e garantir que esteja dentro do intervalo [0, 10]
+      const med2 = Math.max(0, Math.min(((notaProva2 * 0.8) + (notaAep2 * 0.1) + (notaProvaIntegrada2 * 0.1)).toFixed(2), 10));
+      aluno.med2 = med2;
+
+      // Calcular média final e garantir que esteja dentro do intervalo [0, 10]
+      aluno.medFinal = Math.max(0, Math.min(((parseFloat(aluno.med1) + parseFloat(aluno.med2)) / 2).toFixed(2), 10));
 
       // Determina o status de aprovação
       if (aluno.medFinal >= 6) {
@@ -289,7 +309,7 @@ function editarNotasBimestre2(aluno) {
       
       formEdicao.remove(); // Remover o formulário de edição após salvar
     } else {
-      alert("Por favor, preencha todas as notas.");
+      alert("Por favor, preencha todas as notas com valores válidos.");
     }
   };
   formEdicao.appendChild(btnSalvar);
@@ -304,6 +324,7 @@ function editarNotasBimestre2(aluno) {
 
   document.body.appendChild(formEdicao);
 }
+
 
 function verificarNotasBimestre1Adicionadas(aluno) {
   return aluno.prova1 !== null && aluno.aep1 !== null && aluno.provaIntegrada1 !== null;
